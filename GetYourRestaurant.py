@@ -1,8 +1,8 @@
 import pandas as pd, numpy as np
 import requests
 import json
-import gmplot
 import random
+#import gmplot
 import time
 final_data = []
 # Parameters
@@ -29,17 +29,21 @@ def get_List():
         vicinity = result['vicinity']
         data = [name, place_id, lat, lng, rating, types, vicinity]
         final_data.append(data)
-        labels = ['Place Name','Place ID', 'Latitude', 'Longitude', 'Rating', 'Vicinity', 'Stress']
+        labels = ['Place Name','Place ID', 'Latitude', 'Longitude', 'Rating', 'Vicinity', 'Address']
         export_dataframe_1_medium = pd.DataFrame.from_records(final_data, columns=labels)
         export_dataframe_1_medium.to_csv('export_dataframe_1_medium.csv')
+
 get_List()
-target_number = random.randint(0,19)
-def drawfile(file, number):
-  df = pd.read_csv(file, sep=',',usecols=["Latitude", "Longitude"])
-  
-  gmap1 = gmplot.GoogleMapPlotter(df.iloc[number]["Latitude"],df.iloc[number]["Longitude"],20)
 
-  gmap1.draw( "map11.html" )
-
-drawfile('export_dataframe_1_medium.csv', target_number)
-
+index = random.randint(0,19)
+df = pd.read_csv('export_dataframe_1_medium.csv')
+r_name = df.iloc[index]['Place Name']
+r_address = df.iloc[index]['Address']
+r_rating = df.iloc[index]['Rating']
+r_lat = df.iloc[index]['Latitude']
+r_lnt = df.iloc[index]['Longitude']
+print(r_name,end='')
+print(",", end=' ')
+print(r_rating,end='')
+print(",", end=' ')
+print(r_address)
