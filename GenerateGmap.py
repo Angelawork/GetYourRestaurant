@@ -39,7 +39,7 @@ def drawfile(file, number):
   
   gmap1 = gmplot.GoogleMapPlotter(df.iloc[number]["Latitude"],df.iloc[number]["Longitude"],20)
 
-  gmap1.draw( "map11.html" )
+  gmap1.draw( "achoiceforyou!.html" )
 
 drawfile('export_dataframe_1_medium.csv', target_number)
 
