@@ -2,13 +2,14 @@ import pandas as pd, numpy as np
 import requests
 import json
 import gmplot
+import random
 import time
 final_data = []
 # Parameters
 coordinates = ['45.505143,-73.577356']
 keywords = ['restaurant']
 radius = '2000'
-api_key = 'AIzaSyAm8ZVpPSDjgFLgLtC_i5zg8ZRfqANb1ig'
+api_key = 'AIzaSyAbQf2o1IyCiw55jhFCzaTkmsaRpQlQHac'
 def get_List():
   for coordinate in coordinates:
     for keyword in keywords:
@@ -31,4 +32,14 @@ def get_List():
         labels = ['Place Name','Place ID', 'Latitude', 'Longitude', 'Rating', 'Vicinity', 'Stress']
         export_dataframe_1_medium = pd.DataFrame.from_records(final_data, columns=labels)
         export_dataframe_1_medium.to_csv('export_dataframe_1_medium.csv')
+get_List()
+target_number = random.randint(0,19)
+def drawfile(file, number):
+  df = pd.read_csv(file, sep=',',usecols=["Latitude", "Longitude"])
+  
+  gmap1 = gmplot.GoogleMapPlotter(df.iloc[number]["Latitude"],df.iloc[number]["Longitude"],20)
+
+  gmap1.draw( "map11.html" )
+
+drawfile('export_dataframe_1_medium.csv', target_number)
 
