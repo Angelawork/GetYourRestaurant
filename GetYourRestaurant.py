@@ -53,3 +53,12 @@ print(",", end=' ')
 print(r_rating,end='')
 print(",", end=' ')
 print(r_address)
+
+def drawfile(file, number):
+  df = pd.read_csv(file, sep=',',usecols=["Latitude", "Longitude"])
+  
+  gmap1 = gmplot.GoogleMapPlotter(df.iloc[number]["Latitude"],df.iloc[number]["Longitude"],20)
+
+  gmap1.draw( "map11.html" )
+
+drawfile('export_dataframe_1_medium.csv', index)
